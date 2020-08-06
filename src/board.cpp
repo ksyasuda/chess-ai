@@ -49,21 +49,15 @@ static void inbetween(unsigned long i, size_t size) {
 
 void Board::printBoard() {
 	auto size = board.size();
-	bool needSpace = true;
 	topbottom();
 	for(long unsigned i = 0; i < size; ++i) {
 		for(long unsigned j = 0; j < size; ++j) {
-			if(board[i][j] != ' ') needSpace = false;
-			if(!needSpace) {
-				if(j == 0) std::cout << "|   " << board[i][j] << "   |";
-				else if(j == size-1) std::cout << "   " << board[i][j] << "   |\n";
-				else std::cout << "   " << board[i][j] << "   |";
-			}
-			else {
-				if(j == 0) std::cout << "|     " << board[i][j] << "     |";	
-				else if(j == size-1) std::cout << "     " << board[i][j] << "     |\n";
-				else std::cout << "     " << board[i][j] << "     |";
-			}
+			if (j == 0)
+				std::cout << "|   " << board[i][j] << "   |";
+			else if (j == size - 1)
+				std::cout << "   " << board[i][j] << "   |\n";
+			else
+				std::cout << "   " << board[i][j] << "   |";
 		}
 		inbetween(i, size);
 	}
