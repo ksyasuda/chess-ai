@@ -66,10 +66,24 @@ static void inbetween(unsigned long i, size_t size) {
 	}
 }
 
+static void blankLine() {
+	for(auto i = 0; i < 8; ++i) {
+		if(i == 0)
+			std::cout << "|       |";
+		else if(i == 7)
+			std::cout << "       |\n";
+		else
+			std::cout << "       |";
+	}
+	// std::cout << "\n";
+}
+
 void Board::printBoard() {
 	auto size = board.size();
+	char letter = 'A';
 	topbottom();
 	for(long unsigned i = 0; i < size; ++i) {
+		blankLine();
 		for(long unsigned j = 0; j < size; ++j) {
 			if (j == 0) {
 				if(board[i][j].second == 'w')
@@ -81,11 +95,12 @@ void Board::printBoard() {
 			}
 			else if (j == size - 1){
 				if(board[i][j].second == 'w')
-					std::cout << "   " << colors[8] << board[i][j].first << colors[9] << "   |\n";
+					std::cout << "   " << colors[8] << board[i][j].first << colors[9] << "   |";
 				else if(board[i][j].second == 'b')
-					std::cout << "   " << colors[7] << board[i][j].first << colors[9] << "   |\n";
+					std::cout << "   " << colors[7] << board[i][j].first << colors[9] << "   |";
 				else
-					std::cout << "   " << board[i][j].first << "   |\n";
+					std::cout << "   " << board[i][j].first << "   |";
+				std::cout << "   " << letter++ << "\n";
 			}
 			else {
 				if(board[i][j].second == 'w')
@@ -96,7 +111,13 @@ void Board::printBoard() {
 					std::cout << "   " << board[i][j].first << "   |";
 			}
 		}
+		blankLine();
 		inbetween(i, size);
 	}
 	topbottom();
+	auto num = 1;
+	for(auto i = 0; i < 8; ++i) {
+		std::cout << "    " << num++ << "   ";
+	}
+	std::cout << "\n";
 }
